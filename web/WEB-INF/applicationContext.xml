@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="executeTimeInterceptor" class="com.boyle.interceptor.ExecuteTimeInterceptor" />
+
+    <bean id="maintenanceInterceptor" class="com.boyle.interceptor.MaintenanceInterceptor">
+        <property name="maintenanceStartTime" value="23" />
+        <property name="maintenanceEndTime" value="24" />
+        <property name="maintenanceMapping" value="/SpringMVC/maintenance.htm" />
+    </bean>
+
+    <bean id="dynamicHandlerMap" class="com.boyle.handlerMap.dynamicHandlerMap">
+        <!--<property name="mappings">-->
+            <!--<props>-->
+                <!--<prop key="/foobar/{id}">welcomeController</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    </bean>
+
+    <!--<bean id="HandlerMap" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
+        <!--<property name="mappings">-->
+            <!--<props>-->
+                <!--<prop key="/foobar/{id}">welcomeController</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+        <!--&lt;!&ndash;<property name="interceptors">&ndash;&gt;-->
+            <!--&lt;!&ndash;<list>&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="maintenanceInterceptor" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<ref bean="executeTimeInterceptor" />&ndash;&gt;-->
+            <!--&lt;!&ndash;</list>&ndash;&gt;-->
+        <!--&lt;!&ndash;</property>&ndash;&gt;-->
+    <!--</bean>-->
+
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+        <!--<property name="interceptors">-->
+            <!--<list>-->
+                <!--<ref bean="executeTimeInterceptor" />-->
+            <!--</list>-->
+        <!--</property>-->
+    </bean>
+
+    <bean id="welcomeController" class="com.boyle.controller.WelcomeController" />
+    <!--<bean class="com.boyle.controller.MaintenanceController" />-->
+
+
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/pages/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+
+
+</beans>
